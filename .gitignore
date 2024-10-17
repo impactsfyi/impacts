@@ -11,9 +11,6 @@ node_modules/
 # dotenv environment variables file
 .env
 
-# .vscode workspace settings file
-.vscode/settings.json
-
 # npm, yarn and bun lock files
 package-lock.json
 yarn.lock
