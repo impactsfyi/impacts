@@ -283,7 +283,7 @@ function App() {
           </div>
 
           <footer className="w-full bg-background/80 backdrop-blur-md h-[55px] flex flex-row items-center justify-center border-t border-muted-foreground/20 sticky bottom-0">
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-row w-full mx-3 max-w-[700px] flex-1 gap-3">
+            <form onSubmit={handleSubmit(onSubmit as any)} className="flex flex-row w-full mx-3 max-w-[700px] flex-1 gap-3">
               <Input
                 {...register("message", { required: true })}
                 placeholder="Message AI or search repo"
