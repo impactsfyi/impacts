@@ -69,6 +69,8 @@ BuildShip offers a variety of pre-built templates that can be easily replicated 
 
 We will include links to our templates that can be used when developing with Impacts.
 
+We will include the node code that is used in the serverless functions.
+
 ### 🔮 Integrating with RelevanceAI
 
 Relevance AI is a no-code platform that enables users to build and deploy custom AI agents and tools, creating an AI workforce to automate tasks and processes.
@@ -104,3 +106,7 @@ This repo also includes GitHub Actions workflows for building and deploying the 
 ## 💡 Inspiration
 - [supabase-community/postgres-new](https://github.com/supabase-community/postgres-new)
 - [barvian/number-flow](https://github.com/barvian/number-flow)
+
+
+## 🙏 Acknowledgements
+- The logo is the Seedling Vector Icon 3 from [SVG Repo](https://www.svgrepo.com/svg/347391/seedling)

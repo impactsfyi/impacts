@@ -1,9 +1,11 @@
 "use client"
 
 import { useCallback, useEffect, useState } from "react"
+import Image from "next/image"
+import { usePathname } from "next/navigation"
 import logo from "@/assets/logo.png"
 import { Globe, Mic, Sailboat } from "lucide-react"
-import { WindowTitlebar } from "tauri-controls"
+import { WindowControls, WindowTitlebar } from "tauri-controls"
 
 import {
   Menubar,
@@ -23,25 +25,31 @@ import {
 } from "@/components/ui/menubar"
 
 import { AboutDialog } from "./about-dialog"
+import { ExamplesNav } from "./examples-nav"
 import { MenuModeToggle } from "./menu-mode-toggle"
 import { Dialog, DialogTrigger } from "./ui/dialog"
 
 export function Menu() {
   const closeWindow = useCallback(async () => {
     const { appWindow } = await import("@tauri-apps/plugin-window")
-
     appWindow.close()
   }, [])
 
   return (
     <WindowTitlebar
-    // controlsOrder="platform"
-    // windowControlsProps={{ platform: "macos", className: "" }}
+    // controlsOrder="left"
+    // className="pl-0"
+    // windowControlsProps={{ platform: "windows", justify: false }}
     >
       <Menubar className="rounded-none border-b border-none pl-2 lg:pl-3">
         <MenubarMenu>
+          {/* App Logo */}
           <div className="inline-flex h-fit w-fit items-center text-cyan-500">
-            <Sailboat className="h-5 w-5" />
+            {usePathname() === "/" || usePathname() === "/examples/music" ? (
+              <Image src={logo} alt="logo" width={20} height={20} />
+            ) : (
+              <Sailboat className="h-5 w-5" />
+            )}
           </div>
         </MenubarMenu>
 
@@ -69,9 +77,11 @@ export function Menu() {
                 Quit Music <MenubarShortcut>⌘Q</MenubarShortcut>
               </MenubarItem>
             </MenubarContent>
+
             <AboutDialog />
           </Dialog>
         </MenubarMenu>
+
         <MenubarMenu>
           <MenubarTrigger className="relative">File</MenubarTrigger>
           <MenubarContent>
@@ -206,6 +216,8 @@ export function Menu() {
         </MenubarMenu>
 
         <MenuModeToggle />
+
+        <ExamplesNav />
       </Menubar>
     </WindowTitlebar>
   )
