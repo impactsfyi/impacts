@@ -1,0 +1,57 @@
+{
+  "_id": "5dee03073bd6-4616-b8f6-e324e70d6f8a_-_fede7afc-8837-4fbc-8adf-a5c233d87b68",
+  "action_behaviour": "always-ask",
+  "action_retry_config": {
+    "max_retries": 3
+  },
+  "actions": [
+    {
+      "emoji": "https://userdata-bcbe5a.stack.tryrelevance.com/files/public/4dc088f2dcfc-4e60-807e-353c334d4a5b/notebook-emoji-Factory emoji color.png/4e7a8107-ae8f-4b92-b34f-68b0ab27dcc8.png",
+      "title": "Industry Research",
+      "description": "Enrich your data with the top 5 industry trends from Google search. See how this AI Tool works 👉 https://www.loom.com/share/10c34ad409d448f4998be3d6178e43cc",
+      "chain_id": "c2a3b25b-5e98-41ba-852d-a41e9aa27a2d",
+      "project": "3064f1f99d5e-4d58-8523-739252529be6",
+      "region": "f1db6c"
+    },
+    {
+      "emoji": "https://userdata-bcbe5a.stack.tryrelevance.com/files/public/4dc088f2dcfc-4e60-807e-353c334d4a5b/notebook-emoji-extract_website_content-cyan.png/b1984863-e56c-402b-bf64-b7bcd8b0c02d.png",
+      "title": "Scrape & summarize website",
+      "description": "Scrape website content via url, do NOT make up urls",
+      "chain_id": "87dc0dd5-d1f7-4e0c-981a-586dd8f90598",
+      "project": "3064f1f99d5e-4d58-8523-739252529be6",
+      "region": "f1db6c"
+    }
+  ],
+  "agent_id": "fede7afc-8837-4fbc-8adf-a5c233d87b68",
+  "description": "The agent will search for available information relating to the environmental impact, specifically looking into electricity, water consumptions, land clearing and usage of rare minerals of the parent companies of the given AI model.",
+  "emoji": "https://cdn.jsdelivr.net/gh/RelevanceAI/content-cdn@latest/agents/agent_avatars/agent_avatar_05.svg",
+  "insert_date_": "2024-10-18T04:09:22.281Z",
+  "knowledge": [],
+  "last_updated_by": {
+    "user_name": "Ben Jackson"
+  },
+  "machine_user_id": "854fa5e7-0a94-4215-a6f5-019318c5078c",
+  "name": "AI Sustainability Impact Researcher",
+  "project": "5dee03073bd6-4616-b8f6-e324e70d6f8a",
+  "public": false,
+  "starting_messages": [
+    {
+      "metadata": {
+        "is_flow_configuration": true,
+        "should_hide_in_frontend": true
+      },
+      "message": {
+        "importance_level": "short-term-memory",
+        "content": "YOU ALWAYS FOLLOW THIS PROCEDURE AFTER RECEIVING A TASK:\n[{\"action\":\"\"},{\"action\":\"Find the parent companies of the given AI model.\"},{\"action\":\"Research to see if there are any scandals involving unethical practices involved in the training or fine tuning of the model.\\n\\nThis includes but is not limited to:  \\n\\n* Land clearing for data centres\\n\\n* High energy consumption\\n\\n* unethical practices in the supply chain e.g. slavery mining raw materials\\n\\n* Underpaying data labellers\"},{\"action\":\"Output the research findings in a concise 2 sentences in the form of an interesting fact.\"}]",
+        "role": "user"
+      }
+    }
+  ],
+  "system_prompt": "You are an AI sustainability analyst tasked with evaluating the ethical and environmental impact of AI projects.\n\nYou will receive the name of a model and investigate the company that trained it, searching for any scandals about the company pertaining to environmental and ethical consequences of training the model.\n\nThis may involve but is not limited to:\n\n* Energy consumption and carbon footprint.\n\n* Water usage for cooling of data centres\n\n* Land clearing to house data centres\n\n* Ethical issues in extraction of rare minerals used in AI hardware\n\nYou will write a concise concise 2 sentences in the form of an interesting fact.",
+  "update_date_": "2024-10-18T09:06:31.558Z",
+  "version": "latest",
+  "metadata": {
+    "last_run_date": "2024-10-18T05:34:01.843Z"
+  },
+  "embeddable": true
+}
