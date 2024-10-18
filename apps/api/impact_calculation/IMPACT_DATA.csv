@@ -1,0 +1,85 @@
+providerName,country,star_ratings
+Google Cloud Platform,Taiwan,3.2081268582755205
+Google Cloud Platform,China,3.7829534192269576
+Google Cloud Platform,Japan,3.045589692765114
+Google Cloud Platform,Japan,3.045589692765114
+Google Cloud Platform,India,4.647175421209118
+Google Cloud Platform,Singapore,2.6610505450941524
+Google Cloud Platform,Australia,4.179385530227949
+Google Cloud Platform,Finland,1.8364717542120912
+Google Cloud Platform,Belgium,2.058473736372646
+Google Cloud Platform,United Kingdom,3.4697720515361743
+Google Cloud Platform,Germany,3.4380574826560952
+Google Cloud Platform,Netherlands,3.255698711595639
+Google Cloud Platform,Switzerland,1.0634291377601586
+Google Cloud Platform,Canada,1.136769078295342
+Google Cloud Platform,Brazil,1.8126858275520317
+Google Cloud Platform,USA,3.244995044598612
+Google Cloud Platform,USA,2.4580773042616455
+Google Cloud Platform,USA,2.4580773042616455
+Google Cloud Platform,USA,2.1797819623389496
+Google Cloud Platform,USA,1.9538156590683844
+Google Cloud Platform,USA,2.0786917740336968
+Amazon Web Services,USA,3.2525272547076316
+Amazon Web Services,USA,2.4580773042616455
+Amazon Web Services,USA,1.9538156590683844
+Amazon Web Services,USA,2.1797819623389496
+Amazon Web Services,China,3.7829534192269576
+Amazon Web Services,India,4.647175421209118
+Amazon Web Services,Japan,3.045589692765114
+Amazon Web Services,South Korea,3.049554013875124
+Amazon Web Services,Singapore,2.6610505450941524
+Amazon Web Services,Australia,4.179385530227949
+Amazon Web Services,Japan,3.045589692765114
+Amazon Web Services,Canada,1.079286422200198
+Amazon Web Services,China,3.6957383548067395
+Amazon Web Services,China,3.6957383548067395
+Amazon Web Services,Germany,3.4380574826560952
+Amazon Web Services,Ireland,3.4459861248761148
+Amazon Web Services,United Kingdom,3.4697720515361743
+Amazon Web Services,France,1.4162537165510407
+Amazon Web Services,Sweden,1.1863230921704657
+Amazon Web Services,Brazil,1.8126858275520317
+Amazon Web Services,USA,3.2525272547076316
+Amazon Web Services,USA,2.1797819623389496
+Azure,Hong Kong,3.7829534192269576
+Azure,Singapore,2.6610505450941524
+Azure,USA,3.9201189296333006
+Azure,USA,2.4580773042616455
+Azure,USA,2.4580773042616455
+Azure,USA,1.9538156590683844
+Azure,USA,3.2525272547076316
+Azure,USA,2.8251734390485628
+Azure,Ireland,3.4459861248761148
+Azure,Netherlands,3.255698711595639
+Azure,Japan,3.045589692765114
+Azure,Japan,3.045589692765114
+Azure,Brazil,1.8126858275520317
+Azure,Australia,4.179385530227949
+Azure,Australia,4.191278493557978
+Azure,India,4.647175421209118
+Azure,India,4.647175421209118
+Azure,India,4.647175421209118
+Azure,Canada,1.274727452923687
+Azure,Canada,1.079286422200198
+Azure,United Kingdom,3.4697720515361743
+Azure,United Kingdom,3.4697720515361743
+Azure,USA,2.1797819623389496
+Azure,USA,2.1797819623389496
+Azure,South Korea,3.049554013875124
+Azure,South Korea,3.049554013875124
+Azure,France,1.4162537165510407
+Azure,France,1.4162537165510407
+Azure,Australia,4.56788899900892
+Azure,Australia,4.56788899900892
+Azure,South Africa,5.0
+Azure,South Africa,5.0
+OVHCloud,France,1.4162537165510407
+OVHCloud,Canada,1.079286422200198
+Scaleway,France,1.4162537165510407
+CoreWeave,USA,2.1209117938553024
+CoreWeave,USA,2.682854311199207
+CoreWeave,USA,2.8813875123885033
+GroqAI,Australia,5.0
+Groq,Australia,5.0
+Seeweb,Italy,1.0
