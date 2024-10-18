@@ -191,7 +191,7 @@ function App() {
         <aside className="h-full border-r flex flex-col flex-1 min-w-[250px] max-w-[300px] min-h-full">
           <div className="flex flex-1  h-full w-full flex-col p-4">
             <div className="flex flex-col gap-2 text-muted-foreground flex-1">
-              {packageJsonFiles.map((file, index) => (
+              {packageJsonFiles.map((file) => (
                 <RepositoryItem 
                   key={file.id} 
                   file={file} 
