@@ -26,7 +26,7 @@ function App() {
       <header className="w-full bg-background/80 backdrop-blur-md h-[50px] flex flex-row items-center border-b border-muted-foreground/20 sticky top-0">
         <div className="flex flex-row w-full items-center justify-between mx-4">
           <div className="flex flex-row gap-3 items-center">
-            <div className="h-[30px] w-[30px] rounded-md bg-green-800 flex justify-center items-center">
+            <div className="h-[30px] w-[30px] rounded-md bg-green-600 flex justify-center items-center">
               <svg height="18px" viewBox="0 0 134 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M27 0C50.2667 0 69.5533 17.0267 73.0867 39.3C80.92 31.4933 91.7333 26.6667 103.667 26.6667H133.667V43.3333C133.667 67.2667 114.267 86.6667 90.3333 86.6667H73.6667V120H60.3333V66.6667H47C21.2267 66.6667 0.333344 45.7733 0.333344 20V0H27ZM120.333 40H103.667C87.1 40 73.6667 53.4333 73.6667 70V73.3333H90.3333C106.9 73.3333 120.333 59.9 120.333 43.3333V40ZM27 13.3333H13.6667V20C13.6667 38.4067 28.5933 53.3333 47 53.3333H60.3333V46.6667C60.3333 28.26 45.4067 13.3333 27 13.3333Z" fill="white"/>
               </svg>
@@ -53,7 +53,10 @@ function App() {
         <aside className="h-full border-r flex flex-col flex-1 min-w-[250px] max-w-[300px] min-h-full">
           <div className="flex flex-1  h-full w-full justify-center items-center flex-col text-muted-foreground/50 gap-2">
             <i className="ri-git-repository-line text-3xl"></i>
-            <span className="text-sm tracking-tight">No repositories</span>
+            <span className="text-xs tracking-tight">No repositories</span>
+
+            <span className="text-xs tracking-tight">Sign in with <span className="underline">GitHub</span> or <span className="underline">import a repo</span></span>
+
           </div>
 
           <div className="h-[55px] w-full border-t px-4 flex items-center justify-center">
@@ -97,7 +100,7 @@ function App() {
 
               <div className="feature-card p-6 border rounded-xl flex flex-col gap-1">
                 <div className="bg-blue-600/10 text-blue-600 h-12 w-12 text-lg flex justify-center items-center rounded-lg mb-2">
-                  <i className="ri-star-line text-2xl"></i>
+                  <i className="ri-checkbox-circle-line text-2xl"></i>
                 </div>
                 <h2 className="text-md font-semibold tracking-tight">Industry Standards</h2>
                 <p className="text-sm text-muted-foreground">Evaluate and compare the climate impact of different AI solutions.</p>
