@@ -1,16 +1,11 @@
-// import { useState } from "react";
-// import { invoke } from "@tauri-apps/api/core";
-
+import { cn } from "./lib/utils";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "./components/ui/input";
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import { motion } from "framer-motion";
 
 import {
   Dialog,
@@ -21,15 +16,30 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 
-
 function App() {
-  // const [greetMsg, setGreetMsg] = useState("");
-  // const [name, setName] = useState("");
+  interface Message {
+    type: 'user' | 'bot';
+    content: string;
+  }
 
-  // async function greet() {
-  //   // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-  //   setGreetMsg(await invoke("greet", { name }));
-  // }
+  const [messages, setMessages] = useState<Message[]>([]);
+  const { register, handleSubmit, reset } = useForm();
+
+  const onSubmit = async (data: { message: any; }) => {
+    const userMessage: Message = { type: "user", content: data.message };
+    setMessages((prevMessages) => [...prevMessages, userMessage]);
+
+    try {
+      const response = await axios.post("YOUR_API_ENDPOINT", { message: data.message });
+      const botMessage: Message = { type: "bot", content: response.data.message };
+      setMessages((prevMessages) => [...prevMessages, botMessage]);
+    } catch (error) {
+      console.error("Error fetching bot response:", error);
+    }
+
+    reset();
+  };
+
 
   return (
     <div className="flex flex-col w-full">
@@ -74,10 +84,6 @@ function App() {
                 </DialogHeader>
               </DialogContent>
             </Dialog>
-
-            
-
-            
 
             <Dialog>
               <DialogTrigger>
@@ -127,8 +133,8 @@ function App() {
 
               <div>
                 <Button variant="outline" size="sm" className="w-full">
-                  <i className="ri-github-line text-[16px]"></i>
-                  <span className="font-medium tracking-tight">Import from GitHub URL</span>
+                  <i className="ri-share-2-line text-[16px]"></i>
+                  <span className="font-medium tracking-tight">Share Impacts</span>
                 </Button>
               </div>
             </div>
@@ -209,9 +215,29 @@ function App() {
         </aside>
 
         <div className="flex flex-col justify-center items-center h-full flex-1 w-full bg-muted-foreground/5">
-          
 
-          <div className="w-full h-[400px] max-w-[700px] flex-1 flex flex-col justify-center items-center gap-4">
+          {messages.length > 0 && (
+            <div className="w-full max-w-[700px] flex flex-col flex-1">
+              <div className="flex-1"></div>
+              {messages.map((message, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className={`mb-4 ${message.type === "user" ? "text-right" : "text-left"}`}
+                >
+                  <div className={`inline-block px-4 py-2 border rounded-lg text-sm ${message.type === "user" ? "bg-background text-white rounded-br-none" : "bg-gray-200 text-black"}`}>
+                    {message.content}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          )}
+
+          <div 
+            className={cn("w-full h-[400px] max-w-[700px] flex-1 flex flex-col justify-center items-center gap-4 transition-opacity", messages.length > 0 ? "opacity-0 absolute" : "opacity-100 relative")}
+          >
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="feature-card p-6 border rounded-xl flex flex-col gap-1 bg-background">
@@ -257,32 +283,18 @@ function App() {
           </div>
 
           <footer className="w-full bg-background/80 backdrop-blur-md h-[55px] flex flex-row items-center justify-center border-t border-muted-foreground/20 sticky bottom-0">
-            <div className="flex flex-row w-full mx-3 max-w-[700px] flex-1">
-              <Input placeholder="Message AI or search repo" className="flex-1 mr-3 text-xs" />
-
-              <Select>
-                <SelectTrigger className="w-[180px] text-xs">
-                  <div className="flex flex-row gap-2.5">
-                    <i className="ri-sparkling-2-fill"></i>
-                    <SelectValue placeholder="Automation tool" className="text-sm" />
-                  </div>
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="relevance" className="text-xs">RelevanceAI</SelectItem>
-                  <SelectItem value="buildship" className="text-xs">BuildShip</SelectItem>
-                  <SelectItem value="groq" className="text-xs">Groq</SelectItem>
-
-                  
-                </SelectContent>
-              </Select>
-
-            </div>
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-row w-full mx-3 max-w-[700px] flex-1 gap-3">
+              <Input
+                {...register("message", { required: true })}
+                placeholder="Message AI or search repo"
+              />
+              <Button type="submit" size="sm" className="px-10" variant="secondary">
+                Send
+              </Button>
+            </form>
           </footer>
         </div>
       </main>
-
-      
-    
     </div>
   );
 }
