@@ -58,13 +58,39 @@ function App() {
       const selectedPackage = packageJsonFiles.find(file => file.id === selectedPackageId);
       const packageContent = selectedPackage ? JSON.parse(selectedPackage.content) : null;
       
+      let contextMessage = `We are working with the repository "${packageContent?.name || 'Unknown'}". `;
+      contextMessage += "The dependencies are:\n";
+      
+      if (packageContent?.dependencies) {
+        contextMessage += "Dependencies:\n";
+        Object.entries(packageContent.dependencies).forEach(([key, value]) => {
+          contextMessage += `- ${key}: ${value}\n`;
+        });
+      }
+      
+      if (packageContent?.devDependencies) {
+        contextMessage += "\nDev Dependencies:\n";
+        Object.entries(packageContent.devDependencies).forEach(([key, value]) => {
+          contextMessage += `- ${key}: ${value}\n`;
+        });
+      }
+      
+      contextMessage += `\nUser's question: ${data.message}`;
+      contextMessage += `\n\nIf you don't fully understand the prompt or are unsure how to respond, please provide a structured response including the following sections:
+      1. Impact Calculation
+      2. Design Recommendations
+      3. Rating System
+      4. Industry Standards
+  
+      Each section should relate to the context of the repository and its dependencies, if possible.`;
+  
       const response = await fetch("https://ng46ez.buildship.run/claude-chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          message: data.message,
+          message: contextMessage,
           context: {
             packageName: packageContent?.name,
             dependencies: packageContent?.dependencies,
@@ -74,7 +100,7 @@ function App() {
       });
   
       const responseData = await response.json();
-      console.log(responseData)
+      console.log(responseData);
   
       const botMessage: Message = { 
         type: "bot", 
