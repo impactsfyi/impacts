@@ -42,8 +42,8 @@ function App() {
             </Button>
 
             <Button size="sm" className="text-xs rounded-sm">
-              <i className="ri-git-repository-line text-[16px]"></i>
-              <span className="font-medium tracking-tight">Import repo</span>
+              <i className="ri-upload-2-line text-[16px]"></i>
+              <span className="font-medium tracking-tight">Import</span>
             </Button>
           </div>
         </div>
@@ -51,16 +51,27 @@ function App() {
 
       <main className="flex flex-row px-0 flex-1">
         <aside className="h-full border-r flex flex-col flex-1 min-w-[250px] max-w-[300px] min-h-full">
-          <div className="flex flex-1  h-full w-full justify-center items-center flex-col text-muted-foreground/50 gap-2">
-            <i className="ri-git-repository-line text-3xl"></i>
-            <span className="text-xs tracking-tight">No repositories</span>
+          <div className="flex flex-1  h-full w-full flex-col p-4">
 
-            <span className="text-xs tracking-tight">Sign in with <span className="underline">GitHub</span> or <span className="underline">import a repo</span></span>
+            {/* <div className="flex flex-col justify-center items-center gap-2 text-muted-foreground/80 ">
+              <i className="ri-git-repository-line text-3xl"></i>
+              <span className="text-xs tracking-tight">No repositories</span>
+              <span className="text-xs tracking-tight">Sign in with <span className="underline text-muted-foreground">GitHub</span> or <span className="underline text-muted-foreground">import a repo</span></span>
+            </div> */}
 
+            <div className="flex flex-col gap-2 text-muted-foreground">
+              <div className="flex flex-row bg-muted-foreground/10 px-2 py-1 rounded  w-full items-center gap-1.5">
+                <i className="ri-git-repository-line text-lg"></i>
+                <span className="text-[0.8rem]">impactsfyi/impacts</span>
+              </div>
+            </div>
           </div>
 
-          <div className="h-[55px] w-full border-t px-4 flex items-center justify-center">
-            <Button variant="outline" className="w-full" size="sm">
+          <div className="h-[55px] w-full border-t px-4 flex items-center justify-center gap-3">
+            <Button variant="outline" size="sm">
+              <i className="ri-information-2-line text-[16px]"></i>  
+            </Button>
+            <Button variant="outline" className="flex-1" size="sm">
               <i className="ri-equalizer-3-line text-[16px]"></i>  
               <span className="tracking-tight">Settings</span>
             </Button>
