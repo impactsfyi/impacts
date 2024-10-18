@@ -11,7 +11,7 @@
 ## Need
 
 - Agent to create the qualititative statistic (scandal)
-- Bullshit calculation of energy usage (can be chatbot agent based to ask:
+- Bullshit calculation of energy usage (can be chatbot agent based - or repo crawler based to find out:
   where are you from? who is your cloud provider? which region of servers you are using?)
   and return
 - recommender of actions to improve impact (say use groq for 10x energy efficiency)
