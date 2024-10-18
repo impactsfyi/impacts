@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "./components/ui/input";
 
 import { useForm } from "react-hook-form";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 import { v4 as uuid } from 'uuid';
 
@@ -32,6 +32,9 @@ function App() {
 
   const [selectedPackageId, setSelectedPackageId] = useState<string | null>(null);
 
+  const [isLoading, setIsLoading] = useState(false);
+
+
   useEffect(() => {
     const storedFiles = localStorage.getItem('packageJsonFiles');
     if (storedFiles) {
@@ -53,6 +56,10 @@ function App() {
   const onSubmit = async (data: { message: string }) => {
     const userMessage: Message = { type: "user", content: data.message };
     setMessages((prevMessages) => [...prevMessages, userMessage]);
+    setIsLoading(true);
+
+    // clear the input field
+    reset();
   
     try {
       const selectedPackage = packageJsonFiles.find(file => file.id === selectedPackageId);
@@ -109,6 +116,8 @@ function App() {
       setMessages((prevMessages) => [...prevMessages, botMessage]);
     } catch (error) {
       console.error("Error fetching bot response:", error);
+    } finally {
+      setIsLoading(false);
     }
   
     reset();
@@ -162,7 +171,7 @@ function App() {
 
   return (
     <div className="flex flex-col w-full">
-      <header className="w-full bg-background/80 backdrop-blur-md h-[50px] flex flex-row items-center border-b border-muted-foreground/20 sticky top-0">
+      <header className="w-full bg-background/80 backdrop-blur-md h-[50px] flex flex-row items-center border-b border-muted-foreground/20 sticky top-0 z-50">
         <div className="flex flex-row w-full items-center justify-between mx-4">
           <div className="flex flex-row gap-3 items-center">
             <div className="h-[30px] w-[30px] rounded-md bg-green-600 flex justify-center items-center">
@@ -318,20 +327,36 @@ function App() {
           {messages.length > 0 && (
             <div className="w-full max-w-[700px] flex flex-col flex-1">
               <div className="flex-1"></div>
-              {messages.map((message, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className={`mb-4 ${message.type === "user" ? "text-right" : "text-left"}`}
-                >
-                  <div className={`inline-block px-4 py-2 border rounded-lg text-sm ${message.type === "user" ? "bg-background text-white rounded-br-none ml-14" : "bg-gray-200 text-black mr-14"}`}>
-                    {message.content}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+                <AnimatePresence>
+                  {messages.map((message, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.3 }}
+                      className={`mb-4 ${message.type === "user" ? "text-right" : "text-left"}`}
+                    >
+                      <div className={`inline-block px-4 py-2 border rounded-lg text-sm ${message.type === "user" ? "bg-background text-white rounded-br-none ml-14" : "bg-gray-200 text-black mr-14"}`}>
+                        {message.content}
+                      </div>
+                    </motion.div>
+                  ))}
+                  {isLoading && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.3 }}
+                      className="mb-4 text-left"
+                    >
+                      <div className="inline-block px-4 py-2 border rounded-lg text-sm bg-gray-200 text-black mr-14">
+                        Just a moment...
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
           )}
 
           <div 
@@ -384,7 +409,7 @@ function App() {
               <Input
                 {...register("message", { required: true })}
                 placeholder="Message AI or search repo"
-                className="text-xs"
+                className="text-xs bg-background"
               />
               <Button type="submit" size="sm" className="px-10" variant="secondary">
                 Send
