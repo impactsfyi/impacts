@@ -55,14 +55,21 @@ function App() {
     setMessages((prevMessages) => [...prevMessages, userMessage]);
   
     try {
+      const selectedPackage = packageJsonFiles.find(file => file.id === selectedPackageId);
+      const packageContent = selectedPackage ? JSON.parse(selectedPackage.content) : null;
+      
       const response = await fetch("https://ng46ez.buildship.run/claude-chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          threadId: "your-thread-id", // You may need to manage this
-          message: data.message
+          message: data.message,
+          context: {
+            packageName: packageContent?.name,
+            dependencies: packageContent?.dependencies,
+            devDependencies: packageContent?.devDependencies
+          }
         })
       });
   
@@ -71,7 +78,7 @@ function App() {
   
       const botMessage: Message = { 
         type: "bot", 
-        content: responseData.content // Adjust this based on the actual response structure
+        content: responseData.message
       };
       setMessages((prevMessages) => [...prevMessages, botMessage]);
     } catch (error) {
@@ -293,7 +300,7 @@ function App() {
                   transition={{ duration: 0.3 }}
                   className={`mb-4 ${message.type === "user" ? "text-right" : "text-left"}`}
                 >
-                  <div className={`inline-block px-4 py-2 border rounded-lg text-sm ${message.type === "user" ? "bg-background text-white rounded-br-none" : "bg-gray-200 text-black"}`}>
+                  <div className={`inline-block px-4 py-2 border rounded-lg text-sm ${message.type === "user" ? "bg-background text-white rounded-br-none ml-14" : "bg-gray-200 text-black mr-14"}`}>
                     {message.content}
                   </div>
                 </motion.div>
