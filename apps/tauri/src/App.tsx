@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { invoke } from "@tauri-apps/api/core";
+// import { useState } from "react";
+// import { invoke } from "@tauri-apps/api/core";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "./components/ui/input";
@@ -13,13 +13,13 @@ import {
 } from "@/components/ui/select"
 
 function App() {
-  const [greetMsg, setGreetMsg] = useState("");
-  const [name, setName] = useState("");
+  // const [greetMsg, setGreetMsg] = useState("");
+  // const [name, setName] = useState("");
 
-  async function greet() {
-    // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-    setGreetMsg(await invoke("greet", { name }));
-  }
+  // async function greet() {
+  //   // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
+  //   setGreetMsg(await invoke("greet", { name }));
+  // }
 
   return (
     <div className="flex flex-col w-full">
