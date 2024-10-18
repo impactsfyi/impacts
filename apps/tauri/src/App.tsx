@@ -36,12 +36,12 @@ function App() {
           </div>
 
           <div className="flex flex-row gap-3">
-            <Button size="sm" className="text-xs rounded-sm" variant="secondary">
-              <i className="ri-leaf-line text-[16px]"></i>
+            <Button size="sm" className="text-xs rounded-sm" variant="outline">
+              <i className="ri-pages-line text-[16px]"></i>
               <span className="font-medium tracking-tight">Resources</span>
             </Button>
 
-            <Button size="sm" className="text-xs rounded-sm">
+            <Button variant="secondary" size="sm" className="text-xs rounded-sm">
               <i className="ri-upload-2-line text-[16px]"></i>
               <span className="font-medium tracking-tight">Import</span>
             </Button>
@@ -63,6 +63,16 @@ function App() {
               <div className="flex flex-row bg-muted-foreground/10 px-2 py-1 rounded  w-full items-center gap-1.5">
                 <i className="ri-git-repository-line text-lg"></i>
                 <span className="text-[0.8rem]">impactsfyi/impacts</span>
+
+                <div className="flex-1"></div>
+
+                <div className="bg-muted-foreground/20 px-1 rounded">
+                  <i className="ri-more-fill text-white"></i>
+                </div>
+              </div>
+
+              <div>
+
               </div>
             </div>
           </div>
@@ -72,28 +82,28 @@ function App() {
               <i className="ri-information-2-line text-[16px]"></i>  
             </Button>
             <Button variant="outline" className="flex-1" size="sm">
-              <i className="ri-equalizer-3-line text-[16px]"></i>  
+              <i className="ri-settings-4-line text-[16px]"></i>
               <span className="tracking-tight">Settings</span>
             </Button>
           </div>
         </aside>
 
-        <div className="flex flex-col justify-center items-center h-full flex-1 w-full">
+        <div className="flex flex-col justify-center items-center h-full flex-1 w-full bg-muted-foreground/5">
           
 
-          <div className="w-full h-[400px] max-w-[700px] flex-1 flex justify-center items-center">
+          <div className="w-full h-[400px] max-w-[700px] flex-1 flex flex-col justify-center items-center gap-4">
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="feature-card p-6 border rounded-xl flex flex-col gap-1">
-                <div className="bg-orange-600/10 text-orange-600 h-12 w-12 text-lg flex justify-center items-center rounded-lg mb-2">
+              <div className="feature-card p-6 border rounded-xl flex flex-col gap-1 bg-background">
+                <div className="bg-orange-600/15 text-orange-600 h-10 w-10 text-lg flex justify-center items-center rounded-md mb-2">
                   <i className="ri-calculator-line text-2xl"></i>
                 </div>
                 <h2 className="text-md font-semibold tracking-tight">Impact Calculation</h2>
                 <p className="text-sm text-muted-foreground">Detailed analysis of your AI project's environmental footprint.</p>
               </div>
 
-              <div className="feature-card p-6 border rounded-xl flex flex-col gap-1">
-                <div className="bg-green-600/10 text-green-600 h-12 w-12 text-lg flex justify-center items-center rounded-lg mb-2">
+              <div className="feature-card p-6 border rounded-xl flex flex-col gap-1 bg-background">
+                <div className="bg-green-600/15 text-green-600 h-10 w-10 text-lg flex justify-center items-center rounded-md mb-2">
                   <i className="ri-artboard-2-line text-2xl"></i>
                 </div>
                 <h2 className="text-md font-semibold tracking-tight">Design Recommendations</h2>
@@ -101,22 +111,27 @@ function App() {
               </div>
 
 
-              <div className="feature-card p-6 border rounded-xl flex flex-col gap-1">
-                <div className="bg-yellow-600/10 text-yellow-600 h-12 w-12 text-lg flex justify-center items-center rounded-lg mb-2">
+              <div className="feature-card p-6 border rounded-xl flex flex-col gap-1 bg-background">
+                <div className="bg-yellow-600/15 text-yellow-600 h-10 w-10 text-lg flex justify-center items-center rounded-md mb-2">
                   <i className="ri-star-line text-2xl"></i>
                 </div>
                 <h2 className="text-md font-semibold tracking-tight">Rating System</h2>
                 <p className="text-sm text-muted-foreground">Evaluate and compare the climate impact of different AI solutions.</p>
               </div>      
 
-              <div className="feature-card p-6 border rounded-xl flex flex-col gap-1">
-                <div className="bg-blue-600/10 text-blue-600 h-12 w-12 text-lg flex justify-center items-center rounded-lg mb-2">
+              <div className="feature-card p-6 border rounded-xl flex flex-col gap-1 bg-background">
+                <div className="bg-blue-600/15 text-blue-600 h-10 w-10 text-lg flex justify-center items-center rounded-md mb-2">
                   <i className="ri-checkbox-circle-line text-2xl"></i>
                 </div>
                 <h2 className="text-md font-semibold tracking-tight">Industry Standards</h2>
                 <p className="text-sm text-muted-foreground">Evaluate and compare the climate impact of different AI solutions.</p>
               </div>    
 
+            </div>
+
+            <div className="border bg-background/40 flex w-full rounded-md p-4 flex-col gap-2 text-xs text-center text-muted-foreground">
+              <i className="ri-drag-drop-line text-lg"></i>
+              <span className="text-xs">Drag and drop your repo into the chat to quickly get started.</span>
             </div>
 
           </div>
@@ -127,16 +142,17 @@ function App() {
 
               <Select>
                 <SelectTrigger className="w-[180px] text-xs">
-                  <SelectValue placeholder="Select AI Model" className="text-xs" />
+                  <div className="flex flex-row gap-2.5">
+                    <i className="ri-sparkling-2-fill"></i>
+                    <SelectValue placeholder="LLM" className="text-sm" />
+                  </div>
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="gpt4">GPT-4</SelectItem>
-                  <SelectItem value="claude">Claude</SelectItem>
-                  <SelectItem value="palm">PaLM</SelectItem>
-                  <SelectItem value="dalle">DALL-E</SelectItem>
-                  <SelectItem value="stable-diffusion">Stable Diffusion</SelectItem>
-                  <SelectItem value="midjourney">Midjourney</SelectItem>
-                  <SelectItem value="bert">BERT</SelectItem>
+                  <SelectItem value="relevance" className="text-xs">RelevanceAI</SelectItem>
+                  <SelectItem value="buildship" className="text-xs">BuildShip</SelectItem>
+                  <SelectItem value="groq" className="text-xs">Groq</SelectItem>
+
+                  
                 </SelectContent>
               </Select>
 
