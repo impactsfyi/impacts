@@ -20,8 +20,8 @@ This project can be used from directly within a web browser:
 
 Check the releases page for all download links.
 
-- [macOS](https://github.com/impacts/impacts/releases/latest/download/impacts-macos.dmg)
-- [Windows](https://github.com/impacts/impacts/releases/latest/download/impacts-windows.exe)
+- [macOS](https://github.com/impacts-impacts-releases/latest/download/impacts-macos.dmg)
+- [Windows](https://github.com/impacts-impacts-releases/latest/download/impacts-windows.exe)
 - [Linux]()
 
 ## 🛠 Development
@@ -49,7 +49,7 @@ The project is organised as follows:
 
 To install all packages and dependencies:
 ```
-git clone https://github.com/impacts/impacts.git
+git clone https://github.com/impacts-impacts.git
 pnpm i
 ```
 
@@ -82,8 +82,6 @@ Included in the ```apps/api/agents/*``` directory are ```*.rai``` files (JSON) f
 The AI Impact Tool utilizes several AI agents to analyze and optimize projects:
 
 - **ImpactAnalyser**: Evaluates the environmental impact of code and infrastructure
-- **OptimizationAdvisor**: Suggests improvements to reduce resource consumption
-- **TrendTracker**: Monitors industry standards and best practices for sustainable practices
 
 ## 🔒 Security
 The Impacts tool operates locally on your device, with no backend or data transmission. This ensures your project information remains secure and private, while providing a completely free and open-source solution for sustainable development.

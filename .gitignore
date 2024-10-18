@@ -40,3 +40,6 @@ pids
 .idea
 debug.log
 # TODO.md
+
+# dist
+dist/

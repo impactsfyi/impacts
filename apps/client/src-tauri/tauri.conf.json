@@ -1,7 +1,0 @@
-{
-  "identifier": "com.github.impactsfyi.client",
-  "build": {
-    "beforeDevCommand": "pnpm dev",
-    "beforeBuildCommand": "pnpm build"
-  }
-}
