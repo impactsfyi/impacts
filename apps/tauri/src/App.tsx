@@ -59,7 +59,7 @@ function App() {
               <span className="text-xs tracking-tight">Sign in with <span className="underline text-muted-foreground">GitHub</span> or <span className="underline text-muted-foreground">import a repo</span></span>
             </div> */}
 
-            <div className="flex flex-col gap-2 text-muted-foreground">
+            <div className="flex flex-col gap-2 text-muted-foreground flex-1">
               <div className="flex flex-row bg-muted-foreground/10 px-2 py-1 rounded  w-full items-center gap-1.5">
                 <i className="ri-git-repository-line text-lg"></i>
                 <span className="text-[0.8rem]">impactsfyi/impacts</span>
@@ -71,8 +71,13 @@ function App() {
                 </div>
               </div>
 
-              <div>
+              <div className="flex-1"></div>
 
+              <div>
+                <Button variant="outline" size="sm" className="w-full">
+                  <i className="ri-github-line text-[16px]"></i>
+                  <span className="font-medium tracking-tight">Import from GitHub</span>
+                </Button>
               </div>
             </div>
           </div>
@@ -136,15 +141,15 @@ function App() {
 
           </div>
 
-          <footer className="w-full bg-background/80 backdrop-blur-md h-[55px] flex flex-row items-center border-t border-muted-foreground/20 sticky bottom-0">
-            <div className="flex flex-row w-full mx-3">
-              <Input placeholder="Message AI or search repositories" className="w-full min-w-[600px] mr-3 text-xs" />
+          <footer className="w-full bg-background/80 backdrop-blur-md h-[55px] flex flex-row items-center justify-center border-t border-muted-foreground/20 sticky bottom-0">
+            <div className="flex flex-row w-full mx-3 max-w-[700px] flex-1">
+              <Input placeholder="Message AI or search repo" className="flex-1 mr-3 text-xs" />
 
               <Select>
                 <SelectTrigger className="w-[180px] text-xs">
                   <div className="flex flex-row gap-2.5">
                     <i className="ri-sparkling-2-fill"></i>
-                    <SelectValue placeholder="LLM" className="text-sm" />
+                    <SelectValue placeholder="Automation tool" className="text-sm" />
                   </div>
                 </SelectTrigger>
                 <SelectContent>
