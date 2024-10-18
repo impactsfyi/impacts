@@ -1,11 +1,12 @@
 import { cn } from "./lib/utils";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "./components/ui/input";
 
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { motion } from "framer-motion";
+
+import { v4 as uuid } from 'uuid';
 
 import {
   Dialog,
@@ -16,6 +17,9 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 
+import { PackageJson } from "./types";
+import { RepositoryItem } from "./RepoItem";
+
 function App() {
   interface Message {
     type: 'user' | 'bot';
@@ -23,23 +27,105 @@ function App() {
   }
 
   const [messages, setMessages] = useState<Message[]>([]);
+  const [packageJsonFiles, setPackageJsonFiles] = useState<PackageJson[]>([]);
   const { register, handleSubmit, reset } = useForm();
 
-  const onSubmit = async (data: { message: any; }) => {
+  const [selectedPackageId, setSelectedPackageId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const storedFiles = localStorage.getItem('packageJsonFiles');
+    if (storedFiles) {
+      const parsedFiles = JSON.parse(storedFiles);
+      setPackageJsonFiles(parsedFiles);
+      if (parsedFiles.length > 0 && !selectedPackageId) {
+        setSelectedPackageId(parsedFiles[0].id);
+      }
+    }
+  }, [selectedPackageId]);
+
+  useEffect(() => {
+    const storedFiles = localStorage.getItem('packageJsonFiles');
+    if (storedFiles) {
+      setPackageJsonFiles(JSON.parse(storedFiles));
+    }
+  }, []);
+
+  const onSubmit = async (data: { message: string }) => {
     const userMessage: Message = { type: "user", content: data.message };
     setMessages((prevMessages) => [...prevMessages, userMessage]);
-
+  
     try {
-      const response = await axios.post("YOUR_API_ENDPOINT", { message: data.message });
-      const botMessage: Message = { type: "bot", content: response.data.message };
+      const response = await fetch("https://ng46ez.buildship.run/claude-chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          threadId: "your-thread-id", // You may need to manage this
+          message: data.message
+        })
+      });
+  
+      const responseData = await response.json();
+      console.log(responseData)
+  
+      const botMessage: Message = { 
+        type: "bot", 
+        content: responseData.content // Adjust this based on the actual response structure
+      };
       setMessages((prevMessages) => [...prevMessages, botMessage]);
     } catch (error) {
       console.error("Error fetching bot response:", error);
     }
-
+  
     reset();
   };
 
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file && file.name.endsWith('.json')) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const content = e.target?.result as string;
+        try {
+          const parsedContent = JSON.parse(content);
+
+          const newFile: PackageJson = { 
+            id: uuid(),
+            filename: file.name, 
+            name: parsedContent.name, 
+            content 
+          };
+          setPackageJsonFiles((prevFiles) => {
+            const updatedFiles = [...prevFiles, newFile];
+            localStorage.setItem('packageJsonFiles', JSON.stringify(updatedFiles));
+            return updatedFiles;
+          });
+        } catch (error) {
+          console.error("Invalid JSON file");
+        }
+      };
+      reader.readAsText(file);
+    }
+  };
+
+  const deleteFile = (id: string) => {
+    setPackageJsonFiles((prevFiles) => {
+      const updatedFiles = prevFiles.filter((file) => file.id !== id);
+      localStorage.setItem('packageJsonFiles', JSON.stringify(updatedFiles));
+      return updatedFiles;
+    });
+  };
+
+  async function shareImpacts() {
+    const shareData = {
+      title: "Impacts",
+      text: "Discover the climate impact and sustainability of your project with Impacts, an AI tool that analyses codebases for environmental insights.",
+      url: "https://impacts.fyi",
+    };
+    
+    await navigator.share(shareData);
+  }
 
   return (
     <div className="flex flex-col w-full">
@@ -71,15 +157,10 @@ function App() {
                   </DialogDescription>
 
                   <div className="grid grid-cols-2 gap-3 pt-3">
-                    {/* https://www.green-algorithms.org */}
                     <Button variant="outline" className="text-sm">Green Algorithms</Button>
-                    {/* https://mlco2.github.io/impact/ */}
                     <Button variant="outline" className="text-sm">ML CO2 Impact</Button>
-                    {/* https://www.industry.gov.au/publications/australias-artificial-intelligence-ethics-principles/australias-ai-ethics-principles */}
                     <Button variant="outline" className="text-sm">AI Ethics Principles</Button>
-                    {/* https://sustain.algorithmwatch.org/en/how-sustainable-is-my-ai/ */}
                     <Button variant="outline" className="text-sm">How Sustainable Is My AI?</Button>
-
                   </div>
                 </DialogHeader>
               </DialogContent>
@@ -98,8 +179,7 @@ function App() {
                   <DialogDescription className="pt-1">
                     You can import a local repository or import a repo from GitHub by providing the URL.
                   </DialogDescription>
-
-                  
+                  <Input type="file" accept=".json" onChange={handleFileUpload} />
                 </DialogHeader>
               </DialogContent>
             </Dialog>
@@ -110,29 +190,22 @@ function App() {
       <main className="flex flex-row px-0 flex-1">
         <aside className="h-full border-r flex flex-col flex-1 min-w-[250px] max-w-[300px] min-h-full">
           <div className="flex flex-1  h-full w-full flex-col p-4">
-
-            {/* <div className="flex flex-col justify-center items-center gap-2 text-muted-foreground/80 ">
-              <i className="ri-git-repository-line text-3xl"></i>
-              <span className="text-xs tracking-tight">No repositories</span>
-              <span className="text-xs tracking-tight">Sign in with <span className="underline text-muted-foreground">GitHub</span> or <span className="underline text-muted-foreground">import a repo</span></span>
-            </div> */}
-
             <div className="flex flex-col gap-2 text-muted-foreground flex-1">
-              <div className="flex flex-row bg-muted-foreground/10 px-2 py-1 rounded  w-full items-center gap-1.5">
-                <i className="ri-git-repository-line text-lg"></i>
-                <span className="text-[0.8rem]">impactsfyi/impacts</span>
-
-                <div className="flex-1"></div>
-
-                <div className="bg-muted-foreground/20 px-1 rounded">
-                  <i className="ri-more-fill text-white"></i>
-                </div>
-              </div>
-
+              {packageJsonFiles.map((file, index) => (
+                <RepositoryItem 
+                  key={file.id} 
+                  file={file} 
+                  onDelete={deleteFile}
+                  isSelected={file.id === selectedPackageId}
+                  onSelect={() => setSelectedPackageId(file.id)}
+                />
+              ))}
               <div className="flex-1"></div>
-
               <div>
-                <Button variant="outline" size="sm" className="w-full">
+                <Button 
+                  variant="outline" size="sm" className="w-full"
+                  onClick={shareImpacts}
+                >
                   <i className="ri-share-2-line text-[16px]"></i>
                   <span className="font-medium tracking-tight">Share Impacts</span>
                 </Button>
@@ -141,8 +214,6 @@ function App() {
           </div>
 
           <div className="h-[55px] w-full border-t px-4 flex items-center justify-center gap-3">
-            
-
             <Dialog>
               <DialogTrigger>
                 <Button variant="outline" size="sm" className="text-muted-foreground">
@@ -164,7 +235,6 @@ function App() {
                     <span className="mr-10">
                       If you are interested in contributing to this project, please open an issue on the GitHub repository.
                     </span>
-                    
                   </DialogDescription>
 
                   <Button variant="outline" className="mt-4">
@@ -175,7 +245,6 @@ function App() {
               </DialogContent>
             </Dialog>
             
-
             <Dialog>
               <DialogTrigger className="flex-1 flex">
                 <Button variant="outline" className="flex-1 text-muted-foreground" size="sm">
@@ -206,8 +275,6 @@ function App() {
                       <span className="font-medium tracking-tight text-xs">Save</span>
                     </Button>
                   </div>
-
-                  
                 </DialogHeader>
               </DialogContent>
             </Dialog>
@@ -215,7 +282,6 @@ function App() {
         </aside>
 
         <div className="flex flex-col justify-center items-center h-full flex-1 w-full bg-muted-foreground/5">
-
           {messages.length > 0 && (
             <div className="w-full max-w-[700px] flex flex-col flex-1">
               <div className="flex-1"></div>
@@ -238,7 +304,6 @@ function App() {
           <div 
             className={cn("w-full h-[400px] max-w-[700px] flex-1 flex flex-col justify-center items-center gap-4 transition-opacity", messages.length > 0 ? "opacity-0 absolute" : "opacity-100 relative")}
           >
-            
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="feature-card p-6 border rounded-xl flex flex-col gap-1 bg-background">
                 <div className="bg-orange-600/15 text-orange-600 h-10 w-10 text-lg flex justify-center items-center rounded-md mb-2">
@@ -256,14 +321,13 @@ function App() {
                 <p className="text-sm text-muted-foreground">Actionable steps to minimize environmental impact during development.</p>
               </div>
 
-
               <div className="feature-card p-6 border rounded-xl flex flex-col gap-1 bg-background">
                 <div className="bg-yellow-600/15 text-yellow-600 h-10 w-10 text-lg flex justify-center items-center rounded-md mb-2">
                   <i className="ri-star-line text-2xl"></i>
                 </div>
                 <h2 className="text-md font-semibold tracking-tight">Rating System</h2>
                 <p className="text-sm text-muted-foreground">Evaluate and compare the climate impact of different AI solutions.</p>
-              </div>      
+              </div>
 
               <div className="feature-card p-6 border rounded-xl flex flex-col gap-1 bg-background">
                 <div className="bg-blue-600/15 text-blue-600 h-10 w-10 text-lg flex justify-center items-center rounded-md mb-2">
@@ -287,6 +351,7 @@ function App() {
               <Input
                 {...register("message", { required: true })}
                 placeholder="Message AI or search repo"
+                className="text-xs"
               />
               <Button type="submit" size="sm" className="px-10" variant="secondary">
                 Send
