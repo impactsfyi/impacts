@@ -12,6 +12,16 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+
+
 function App() {
   // const [greetMsg, setGreetMsg] = useState("");
   // const [name, setName] = useState("");
@@ -36,15 +46,57 @@ function App() {
           </div>
 
           <div className="flex flex-row gap-3">
-            <Button size="sm" className="text-xs rounded-sm" variant="outline">
-              <i className="ri-pages-line text-[16px]"></i>
-              <span className="font-medium tracking-tight">Resources</span>
-            </Button>
+            <Dialog>
+              <DialogTrigger>
+                <Button size="sm" className="text-xs rounded-sm" variant="outline">
+                  <i className="ri-pages-line text-[16px]"></i>
+                  <span className="font-medium tracking-tight">Resources</span>
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Resources</DialogTitle>
+                  <DialogDescription className="pt-1">
+                    We've included some additional environmental impact assessment tools, best practices and guidelines and other resources for your convenience.
+                  </DialogDescription>
 
-            <Button variant="secondary" size="sm" className="text-xs rounded-sm">
-              <i className="ri-upload-2-line text-[16px]"></i>
-              <span className="font-medium tracking-tight">Import</span>
-            </Button>
+                  <div className="grid grid-cols-2 gap-3 pt-3">
+                    {/* https://www.green-algorithms.org */}
+                    <Button variant="outline" className="text-sm">Green Algorithms</Button>
+                    {/* https://mlco2.github.io/impact/ */}
+                    <Button variant="outline" className="text-sm">ML CO2 Impact</Button>
+                    {/* https://www.industry.gov.au/publications/australias-artificial-intelligence-ethics-principles/australias-ai-ethics-principles */}
+                    <Button variant="outline" className="text-sm">AI Ethics Principles</Button>
+                    {/* https://sustain.algorithmwatch.org/en/how-sustainable-is-my-ai/ */}
+                    <Button variant="outline" className="text-sm">How Sustainable Is My AI?</Button>
+
+                  </div>
+                </DialogHeader>
+              </DialogContent>
+            </Dialog>
+
+            
+
+            
+
+            <Dialog>
+              <DialogTrigger>
+                <Button variant="secondary" size="sm" className="text-xs rounded-sm">
+                <i className="ri-upload-2-line text-[16px]"></i>
+                <span className="font-medium tracking-tight">Import</span>
+              </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Import</DialogTitle>
+                  <DialogDescription className="pt-1">
+                    You can import a local repository or import a repo from GitHub by providing the URL.
+                  </DialogDescription>
+
+                  
+                </DialogHeader>
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
       </header>
@@ -76,20 +128,83 @@ function App() {
               <div>
                 <Button variant="outline" size="sm" className="w-full">
                   <i className="ri-github-line text-[16px]"></i>
-                  <span className="font-medium tracking-tight">Import from GitHub</span>
+                  <span className="font-medium tracking-tight">Import from GitHub URL</span>
                 </Button>
               </div>
             </div>
           </div>
 
           <div className="h-[55px] w-full border-t px-4 flex items-center justify-center gap-3">
-            <Button variant="outline" size="sm">
-              <i className="ri-information-2-line text-[16px]"></i>  
-            </Button>
-            <Button variant="outline" className="flex-1" size="sm">
-              <i className="ri-settings-4-line text-[16px]"></i>
-              <span className="tracking-tight">Settings</span>
-            </Button>
+            
+
+            <Dialog>
+              <DialogTrigger>
+                <Button variant="outline" size="sm" className="text-muted-foreground">
+                  <i className="ri-information-2-line text-[16px]"></i>  
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Information</DialogTitle>
+                  <DialogDescription className="pt-3 flex flex-col gap-2 text-sm pb-3">
+                    <span className="mr-10">
+                      This project was developed by Ben Jackson and Lachlan Hawthorne for the 2024 SXSW Sydney BuildClub x National AI Centre (NAIC) Hackathon.
+                    </span>
+
+                    <span className="mr-10">
+                    This tool runs entirely in your browser or desktop application, ensuring security and ease of use. It operates in isolation, preventing data sharing between browser sessions or tabs for enhanced privacy.
+                    </span>
+
+                    <span className="mr-10">
+                      If you are interested in contributing to this project, please open an issue on the GitHub repository.
+                    </span>
+                    
+                  </DialogDescription>
+
+                  <Button variant="outline" className="mt-4">
+                    <i className="ri-github-line text-[16px]"></i>
+                    <span className="font-medium tracking-tight text-sm">impactsfyi/impacts</span>
+                  </Button>
+                </DialogHeader>
+              </DialogContent>
+            </Dialog>
+            
+
+            <Dialog>
+              <DialogTrigger className="flex-1 flex">
+                <Button variant="outline" className="flex-1 text-muted-foreground" size="sm">
+                  <i className="ri-settings-4-line text-[16px]"></i>
+                  <span className="tracking-tight">Settings</span>
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Settings</DialogTitle>
+                  <DialogDescription className="pt-2 flex flex-col gap-2 text-sm pb-3">
+                  </DialogDescription>
+
+                  <div className="flex flex-row gap-2">
+                    <Button variant="outline" className="flex-1">
+                      <span className="font-medium tracking-tight text-xs">Cancel</span>
+                    </Button>
+
+                    <div className="flex-1"></div>
+
+                    <Button variant="outline" className="flex-1">
+                      <i className="ri-close-circle-line text-[16px]"></i>
+                      <span className="font-medium tracking-tight text-xs">Reset</span>
+                    </Button>
+
+                    <Button variant="secondary" className="flex-1">
+                      <i className="ri-save-line text-[16px]"></i>
+                      <span className="font-medium tracking-tight text-xs">Save</span>
+                    </Button>
+                  </div>
+
+                  
+                </DialogHeader>
+              </DialogContent>
+            </Dialog>
           </div>
         </aside>
 
